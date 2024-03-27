@@ -37,14 +37,14 @@
                 </li>
                 <li class="sidebar-item">
                     <a
-                        class="sidebar-link"
-                        href="index.html"
+                        class="sidebar-link @active('dashboard')"
+                        href="{{ route('dashboard') }}"
                         aria-expanded="false"
                     >
                         <span>
-                            <i class="ti ti-aperture"></i>
+                            <i class="ti ti-dashboard"></i>
                         </span>
-                        <span class="hide-menu">Modern</span>
+                        <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
             </ul>
@@ -62,10 +62,13 @@
                     />
                 </div>
                 <div class="john-title">
-                    <h6 class="mb-0 fs-4 fw-semibold">Mathew</h6>
-                    <span class="fs-2">Designer</span>
+                    <h6 class="mb-0 fs-4 fw-semibold">
+                        {{ Str::limit(Auth::user()->name, 8) }}
+                    </h6>
+                    <span class="fs-2">Admin</span>
                 </div>
-                <button
+                <a
+                    href="{{ route('logout') }}"
                     class="border-0 bg-transparent text-primary ms-auto"
                     tabindex="0"
                     type="button"
@@ -75,7 +78,7 @@
                     data-bs-title="logout"
                 >
                     <i class="ti ti-power fs-6"></i>
-                </button>
+                </a>
             </div>
         </div>
     </div>

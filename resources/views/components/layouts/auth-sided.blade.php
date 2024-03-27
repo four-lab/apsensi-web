@@ -35,7 +35,7 @@
                             class="text-nowrap logo-img d-block px-4 py-9 w-100"
                         >
                             <img
-                                src="{{ asset('img/logo.png') }}"
+                                src="{{ asset('img/logo-dark.png') }}"
                                 class="light-logo"
                                 alt="Logo-light"
                                 height="40"
