@@ -6,3 +6,17 @@ Livewire.on('swal-s', function(message) {
         timer: 1500
     });
 });
+
+function showConfirmation(message, callback) {
+    Swal.fire({
+        title: 'Apakah anda yakin?',
+        text: message,
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Batal',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            callback();
+        }
+    });
+}

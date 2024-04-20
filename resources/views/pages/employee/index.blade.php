@@ -45,7 +45,8 @@
 
     @push('script')
         <script>
-            const modal = new bootstrap.Modal('#employee-modal');
+            const modalElement = document.getElementById('employee-modal');
+            const modal = new bootstrap.Modal(modalElement);
 
             const empsTable = $('#employees-table').DataTable({
                 serverSide: true,
@@ -78,6 +79,18 @@
 
             Livewire.on('show-modal', () => {
                 modal.show();
+            });
+
+            modalElement.addEventListener('hidden.bs.modal', () => {
+                Livewire.dispatch('employee-cleared');
+            });
+
+            $('#employees-table tbody').on('click', '.btn-delete', function() {
+                showConfirmation('Data pegawai tidak dapat dikembalikan', () => {
+                    Livewire.dispatch('employee-delete', {
+                        id: $(this).data('id')
+                    });
+                });
             });
         </script>
     @endpush

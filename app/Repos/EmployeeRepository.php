@@ -26,6 +26,12 @@ class EmployeeRepository
         return $employee;
     }
 
+    public static function delete(Employee $employee): void
+    {
+        Storage::disk("public")->deleteDirectory("employees/{$employee->id}");
+        $employee->delete();
+    }
+
     private static function managePhotos(Employee $employee, array $photos): array
     {
         $photos = array_map(
@@ -36,8 +42,7 @@ class EmployeeRepository
             $photos
         );
 
-        array_map(
-            fn ($photo) => Storage::disk("public")->delete($photo),
+        Storage::disk("public")->delete(
             array_diff((array) $employee->photos, $photos)
         );
 

@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use App\Livewire\Forms\EmployeeForm;
 use App\Models\Employee;
+use App\Repos\EmployeeRepository;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -20,7 +22,13 @@ class EmployeePage extends Component
 
     public function updated($prop)
     {
-        $this->validateOnly($prop);
+        $rules = [
+            'photos.front' => 'required|image|mimes:jpeg,png,jpg',
+            'photos.left' => 'required|image|mimes:jpeg,png,jpg',
+            'photos.right' => 'required|image|mimes:jpeg,png,jpg',
+        ];
+
+        $this->validateOnly($prop, $rules);
     }
 
     public function save()
@@ -39,5 +47,22 @@ class EmployeePage extends Component
 
         $this->form->setEmployee($employee);
         $this->dispatch('show-modal');
+    }
+
+    #[On('employee-cleared')]
+    public function clear()
+    {
+        $this->form->reset();
+        $this->form->resetValidation();
+    }
+
+    #[On('employee-delete')]
+    public function delete($id)
+    {
+        $employee = Employee::findOrFail($id);
+        EmployeeRepository::delete($employee);
+
+        $this->dispatch('swal-s', 'Berhasil menghapus pegawai');
+        $this->dispatch('employee-saved');
     }
 }

@@ -7,8 +7,9 @@
         <i class="ti ti-pencil"></i>
     </button>
     <button
-        class="btn btn-sm btn-danger"
+        class="btn btn-sm btn-danger btn-delete"
         title="Hapus"
+        data-id="{{ $emp->id }}"
     >
         <i class="ti ti-trash"></i>
     </button>

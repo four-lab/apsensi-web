@@ -64,7 +64,11 @@ class EmployeeForm extends Form
                 'photos.right' => 'required|image|mimes:jpeg,png,jpg',
             ]);
 
-        return $rules;
+        return array_merge($rules, [
+            'photos.front' => 'required',
+            'photos.left' => 'required',
+            'photos.right' => 'required',
+        ]);
     }
 
     public function setEmployee(Employee $employee)
