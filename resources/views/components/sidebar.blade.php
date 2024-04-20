@@ -35,18 +35,23 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Home</span>
                 </li>
-                <li class="sidebar-item">
-                    <a
-                        class="sidebar-link @active('dashboard')"
-                        href="{{ route('dashboard') }}"
-                        aria-expanded="false"
-                    >
-                        <span>
-                            <i class="ti ti-dashboard"></i>
-                        </span>
-                        <span class="hide-menu">Dashboard</span>
-                    </a>
+
+                <x-sidebar.menu-item
+                    route="dashboard"
+                    icon="dashboard"
+                    active="dashboard"
+                >Dashboard</x-sidebar.menu-item>
+
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Master</span>
                 </li>
+
+                <x-sidebar.menu-item
+                    route="employees"
+                    icon="users-group"
+                    active="employees.*"
+                >Data Pegawai</x-sidebar.menu-item>
             </ul>
         </nav>
 
