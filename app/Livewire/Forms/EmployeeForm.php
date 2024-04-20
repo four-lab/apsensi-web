@@ -4,9 +4,9 @@ namespace App\Livewire\Forms;
 
 use App\Enums\Gender;
 use App\Models\Employee;
+use App\Repos\EmployeeRepository;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\Form;
 
 class EmployeeForm extends Form
@@ -20,6 +20,7 @@ class EmployeeForm extends Form
         $birthdate,
         $address;
 
+    public ?Employee $employee = null;
     public Gender $gender = Gender::MALE;
 
     public $photos = [
@@ -31,40 +32,61 @@ class EmployeeForm extends Form
     public function rules(): array
     {
         $rules = [
-            'nik' => 'required|min:16|regex:/^[0-9]+$/|unique:employees,nik',
-            'email' => 'required|unique:employees,email',
-            'username' => 'required|unique:employees,username',
-            'password' => 'required',
             'fullname' => 'required',
             'birthplace' => 'required',
             'birthdate' => 'required|date',
+            'address' => 'required',
+            'nik' => [
+                'required',
+                'min:16',
+                'regex:/^[0-9]+$/',
+                Rule::unique('employees', 'nik')->ignore($this->employee),
+            ],
+            'email' => [
+                'required',
+                Rule::unique('employees', 'email')->ignore($this->employee),
+            ],
+            'username' => [
+                'required',
+                Rule::unique('employees', 'username')->ignore($this->employee),
+            ],
             'gender' => [
                 'required',
                 Rule::enum(Gender::class),
             ],
-            'address' => 'required',
         ];
 
-        return array_merge($rules, [
-            'photos.front' => 'required|image|mimes:jpeg,png,jpg',
-            'photos.left' => 'required|image|mimes:jpeg,png,jpg',
-            'photos.right' => 'required|image|mimes:jpeg,png,jpg',
-        ]);
+        if (!$this->employee)
+            return array_merge($rules, [
+                'password' => 'required',
+                'photos.front' => 'required|image|mimes:jpeg,png,jpg',
+                'photos.left' => 'required|image|mimes:jpeg,png,jpg',
+                'photos.right' => 'required|image|mimes:jpeg,png,jpg',
+            ]);
+
+        return $rules;
+    }
+
+    public function setEmployee(Employee $employee)
+    {
+        $this->fill($employee->only(['nik', 'email', 'username', 'fullname', 'birthplace', 'gender', 'address']));
+
+        $this->employee = $employee;
+        $this->birthdate = $employee->birthdate->format('Y-m-d');
+        $this->photos = (array) $employee->photos;
     }
 
     public function save()
     {
         $data = $this->validate();
-        $photos = $data['photos'];
 
-        $data['password'] = Hash::make($this->password);
-        $data['photos'] = [];
+        if (!$this->employee || !is_null($this->password))
+            $data['password'] = Hash::make($this->password);
 
-        $employee = Employee::create($data);
-        $employee->photos = array_map(
-            fn ($photo) => $photo->storePublicly("employees/{$employee->id}"),
-            $photos
-        );
-        $employee->update();
+        (is_null($this->employee)) ?
+            EmployeeRepository::create($data, $this->photos) :
+            EmployeeRepository::update($this->employee, $data, $this->photos);
+
+        $this->reset();
     }
 }

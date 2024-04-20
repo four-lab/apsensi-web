@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\EmployeeForm;
+use App\Models\Employee;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -24,10 +25,19 @@ class EmployeePage extends Component
 
     public function save()
     {
+        $employee = $this->form->employee;
         $this->form->save();
-        $this->form->reset();
 
-        $this->dispatch('swal-s', 'Berhasil menambahkan pegawai');
         $this->dispatch('employee-saved');
+        $this->dispatch('swal-s', $employee ?
+            'Berhasil mengubah pegawai' : 'Berhasil menambahkan pegawai');
+    }
+
+    public function edit($id)
+    {
+        $employee = Employee::findOrFail($id);
+
+        $this->form->setEmployee($employee);
+        $this->dispatch('show-modal');
     }
 }

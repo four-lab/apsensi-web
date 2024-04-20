@@ -24,7 +24,7 @@ class Employee extends Model
     ];
 
     protected $casts = [
-        'photos' => 'array',
+        'photos' => 'object',
         'gender' => Gender::class,
         'birthdate' => 'date',
     ];

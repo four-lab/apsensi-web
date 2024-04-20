@@ -23,7 +23,7 @@
                     wire:ignore
                 >
                     <table
-                        class="table"
+                        class="table table-striped table-bordered text-nowrap"
                         id="employees-table"
                     >
                         <thead>
@@ -32,7 +32,6 @@
                                 <th>Username</th>
                                 <th>Nama Lengkap</th>
                                 <th>Jenis Kelamin</th>
-                                <th>Tanggal Lahir</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -48,10 +47,37 @@
         <script>
             const modal = new bootstrap.Modal('#employee-modal');
 
-            $('#employees-table').DataTable();
+            const empsTable = $('#employees-table').DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: '{{ route('employees.datatables') }}',
+                columns: [{
+                    data: 'DT_RowIndex',
+                    searchable: false,
+                    sortable: false,
+                }, {
+                    data: 'username',
+                    name: 'username',
+                }, {
+                    data: 'fullname',
+                    name: 'fullname',
+                }, {
+                    data: 'gender',
+                    name: 'gender',
+                }, {
+                    data: 'action',
+                    searchable: false,
+                    sortable: false,
+                }],
+            });
 
             Livewire.on('employee-saved', () => {
+                empsTable.ajax.reload();
                 modal.hide();
+            });
+
+            Livewire.on('show-modal', () => {
+                modal.show();
             });
         </script>
     @endpush

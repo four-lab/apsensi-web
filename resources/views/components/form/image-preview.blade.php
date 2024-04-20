@@ -1,6 +1,6 @@
 @php
     if (is_string($photo)) {
-        $photo = asset($photo);
+        $photo = Storage::url($photo);
     }
 
     if ($photo instanceof Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
