@@ -25,26 +25,39 @@
         >
     </div>
 
-    <div id="main-wrapper">
+    <div
+        class="page-wrapper"
+        id="main-wrapper"
+        data-layout="vertical"
+        data-sidebartype="full"
+        data-sidebar-position="fixed"
+        data-header-position="fixed"
+    >
         <div class="position-relative overflow-hidden radial-gradient min-vh-100 w-100">
             <div class="position-relative z-index-5">
                 <div class="row">
                     <div class="col-xl-7 col-xxl-8">
                         <a
-                            href="/"
+                            href="../main/index.html"
                             class="text-nowrap logo-img d-block px-4 py-9 w-100"
                         >
                             <img
                                 src="{{ asset('img/logo-dark.png') }}"
+                                class="dark-logo"
+                                alt="Logo-Dark"
+                                width="125"
+                            />
+                            <img
+                                src="{{ asset('img/logo-light.png') }}"
                                 class="light-logo"
                                 alt="Logo-light"
-                                height="40"
+                                width="125"
                             />
                         </a>
-                        <div class="d-none d-xl-flex align-items-center justify-content-center h-n80">
+                        <div class="d-none d-xl-flex align-items-center justify-content-center h-75">
                             <img
                                 src="{{ asset('img/login-security.svg') }}"
-                                alt=""
+                                alt="modernize-img"
                                 class="img-fluid"
                                 width="500"
                             >

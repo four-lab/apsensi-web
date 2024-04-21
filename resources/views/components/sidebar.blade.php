@@ -1,31 +1,32 @@
-<aside class="left-sidebar with-vertical">
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a
-                href="index.html"
+                href="./index.html"
                 class="text-nowrap logo-img"
             >
                 <img
-                    src="{{ asset('img/logo-dark.png') }}"
+                    src="/img/logo.svg"
                     class="dark-logo"
-                    alt="Logo-Dark"
                     width="140"
+                    alt=""
                 />
                 <img
-                    src="{{ asset('img/logo-light.png') }}"
+                    src="/img/logo.svg"
                     class="light-logo"
-                    alt="Logo-light"
                     width="140"
+                    alt=""
                 />
             </a>
-            <a
-                href="javascript:void(0)"
-                class="sidebartoggler ms-auto text-decoration-none fs-5 d-block d-xl-none"
+            <div
+                class="close-btn d-lg-none d-block sidebartoggler cursor-pointer"
+                id="sidebarCollapse"
             >
-                <i class="ti ti-x"></i>
-            </a>
+                <i class="ti ti-x fs-8 text-muted"></i>
+            </div>
         </div>
-
+        <!-- Sidebar navigation-->
         <nav
             class="sidebar-nav scroll-sidebar"
             data-simplebar
@@ -36,55 +37,65 @@
                     <span class="hide-menu">Home</span>
                 </li>
 
-                <x-sidebar.menu-item
-                    route="dashboard"
-                    icon="dashboard"
-                    active="dashboard"
-                >Dashboard</x-sidebar.menu-item>
+                <li class="sidebar-item">
+                    <a
+                        class="sidebar-link"
+                        href="/dashboard"
+                        aria-expanded="false"
+                        data-active="/dashboard"
+                    >
+                        <span><i class="ti ti-dashboard"></i></span>
+                        <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
 
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Master</span>
                 </li>
+                <li class="sidebar-item">
+                    <a
+                        class="sidebar-link"
+                        href="/employees"
+                        aria-expanded="false"
+                        data-active="/employees*"
+                    >
+                        <span><i class="ti ti-users-group"></i></span>
+                        <span class="hide-menu">Data Pegawai</span>
+                    </a>
+                </li>
 
-                <x-sidebar.menu-item
-                    route="employees"
-                    icon="users-group"
-                    active="employees.*"
-                >Data Pegawai</x-sidebar.menu-item>
+                {{-- <li class="sidebar-item">
+                    <a
+                        class="sidebar-link has-arrow"
+                        href="#"
+                        aria-expanded="false"
+                    >
+                        <span class="d-flex">
+                            <i class="ti ti-cards"></i>
+                        </span>
+                        <span class="hide-menu">Cards</span>
+                    </a>
+                    <ul
+                        aria-expanded="false"
+                        class="collapse first-level"
+                    >
+                        <li class="sidebar-item">
+                            <a
+                                href="./ui-cards.html"
+                                class="sidebar-link"
+                            >
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-circle"></i>
+                                </div>
+                                <span class="hide-menu">Basic Cards</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li> --}}
             </ul>
         </nav>
-
-        <div class="fixed-profile p-3 mx-4 mb-2 bg-secondary-subtle rounded mt-3">
-            <div class="hstack gap-3">
-                <div class="john-img">
-                    <img
-                        src="{{ asset('img/profile/noimage.jpg') }}"
-                        class="rounded-circle"
-                        width="40"
-                        height="40"
-                        alt=""
-                    />
-                </div>
-                <div class="john-title">
-                    <h6 class="mb-0 fs-4 fw-semibold">
-                        {{ Str::limit(Auth::user()->name, 8) }}
-                    </h6>
-                    <span class="fs-2">Admin</span>
-                </div>
-                <a
-                    href="{{ route('logout') }}"
-                    class="border-0 bg-transparent text-primary ms-auto"
-                    tabindex="0"
-                    type="button"
-                    aria-label="logout"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    data-bs-title="logout"
-                >
-                    <i class="ti ti-power fs-6"></i>
-                </a>
-            </div>
-        </div>
+        <!-- End Sidebar navigation -->
     </div>
+    <!-- End Sidebar scroll-->
 </aside>

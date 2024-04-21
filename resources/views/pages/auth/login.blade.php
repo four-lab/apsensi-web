@@ -1,6 +1,6 @@
 <div class="col-xl-5 col-xxl-4">
     <div class="authentication-login min-vh-100 bg-body row justify-content-center align-items-center p-4">
-        <div class="auth-max-width col-sm-8 col-md-6 col-xl-7 px-4">
+        <div class="auth-max-width col-sm-8 col-md-6 col-xl-10 px-4">
             <h2 class="mb-1 fs-7 fw-bolder">Selamat Datang di Apsensi</h2>
             <p class="mb-7">Admin Dashboard</p>
             <form wire:submit.prevent="authenticate">

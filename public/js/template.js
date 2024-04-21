@@ -1,241 +1,145 @@
-// Merge default and provided settings
-var isSidebar = document.getElementsByClassName("customizer");
-if (isSidebar.length > 0) {
+// Admin Panel settings
+$.fn.AdminSettings = function (settings) {
+  var myid = this.attr("id");
+  // General option for vertical header
+  var defaults = {
+    Theme: true, // this can be true or false ( true means dark and false means light ),
+    SidebarType: "full", // You can change it full / mini-sidebar
+    SidebarPosition: false, // it can be true / false
+    HeaderPosition: true, // it can be true / false
+    BoxedLayout: false, // it can be true / false
+    ThemeBg: "aqua_theme",
+  };
+  var settings = $.extend({}, defaults, settings);
+  // Attribute functions
+  var AdminSettings = {
+    // Settings INIT
+    AdminSettingsInit: function () {
+      AdminSettings.ManageSidebarType();
+      AdminSettings.ManageSidebarPosition();
+    },
+
     //****************************
-    // Handle Click
+    // ManageThemeLayout functions
     //****************************
-
-    document.addEventListener("DOMContentLoaded", function () {
+    ManageSidebarType: function () {
+      switch (settings.SidebarType) {
         //****************************
-        // Theme Direction RTL LTR click
+        // If the sidebar type has full
         //****************************
-        function handleDirection() {
-            document
-                .getElementById("rtl-layout")
-                .addEventListener("click", function () {
-                    document.documentElement.setAttribute("dir", "rtl");
-                    var offcanvasEnd = document.querySelector(
-                        ".customizer.offcanvas-end",
-                    );
-                    if (offcanvasEnd) {
-                        offcanvasEnd.classList.toggle("offcanvas-start");
-                        offcanvasEnd.classList.remove("offcanvas-end");
-                    }
-                });
-
-            document
-                .getElementById("ltr-layout")
-                .addEventListener("click", function () {
-                    document.documentElement.setAttribute("dir", "ltr");
-                    var offcanvasStart = document.querySelector(
-                        ".customizer.offcanvas-start",
-                    );
-                    if (offcanvasStart) {
-                        offcanvasStart.classList.toggle("offcanvas-end");
-                        offcanvasStart.classList.remove("offcanvas-start");
-                    }
-                });
-        }
-
-        handleDirection();
-
-        //****************************
-        // Theme Layout Box or Full
-        //****************************
-        function handleBoxedLayout() {
-            const boxedLayout = document.getElementById("boxed-layout");
-            const fullLayout = document.getElementById("full-layout");
-            const containerFluid =
-                document.querySelectorAll(".container-fluid");
-
-            boxedLayout.addEventListener("click", function () {
-                containerFluid.forEach(function (element) {
-                    element.classList.remove("mw-100");
-                });
-                this.checked;
-                document.documentElement.setAttribute(
-                    "data-boxed-layout",
-                    "boxed",
-                );
-            });
-
-            fullLayout.addEventListener("click", function () {
-                containerFluid.forEach(function (element) {
-                    element.classList.add("mw-100");
-                });
-                document.documentElement.setAttribute(
-                    "data-boxed-layout",
-                    "full",
-                );
-                this.checked;
-            });
-        }
-        handleBoxedLayout();
-
-        //****************************
-        // Theme Layout Vertical or horizontal
-        //****************************
-        function handleLayout() {
-            const verticalLayout = document.getElementById("vertical-layout");
-            const horizontalLayout =
-                document.getElementById("horizontal-layout");
-
-            verticalLayout.addEventListener("click", function () {
-                document.documentElement.setAttribute(
-                    "data-layout",
-                    "vertical",
-                );
-                this.checked;
-            });
-
-            horizontalLayout.addEventListener("click", function () {
-                document.documentElement.setAttribute(
-                    "data-layout",
-                    "horizontal",
-                );
-                this.checked;
-            });
-        }
-        handleLayout();
-
-        //****************************
-        // Theme mode dark or light
-        //****************************
-
-        function handleTheme() {
-            function setThemeAttributes(
-                theme,
-                darkDisplay,
-                lightDisplay,
-                sunDisplay,
-                moonDisplay,
-            ) {
-                document.documentElement.setAttribute("data-bs-theme", theme);
-                document.getElementById(`${theme}-layout`).checked = true;
-
-                document
-                    .querySelectorAll(`.${darkDisplay}`)
-                    .forEach((el) => (el.style.display = "none"));
-                document
-                    .querySelectorAll(`.${lightDisplay}`)
-                    .forEach((el) => (el.style.display = "flex"));
-                document
-                    .querySelectorAll(`.${sunDisplay}`)
-                    .forEach((el) => (el.style.display = "none"));
-                document
-                    .querySelectorAll(`.${moonDisplay}`)
-                    .forEach((el) => (el.style.display = "flex"));
+        case "full":
+          $("#" + myid).attr("data-sidebartype", "full");
+          //****************************
+          /* This is for the mini-sidebar if width is less then 1170*/
+          //****************************
+          var setsidebartype = function () {
+            var width =
+              window.innerWidth > 0 ? window.innerWidth : this.screen.width;
+            if (width < 1300) {
+              $("#main-wrapper").attr("data-sidebartype", "mini-sidebar");
+              $("#main-wrapper").addClass("mini-sidebar");
+            } else {
+              $("#main-wrapper").attr("data-sidebartype", "full");
+              $("#main-wrapper").removeClass("mini-sidebar");
             }
-
-            document.querySelectorAll(".dark-layout").forEach((element) => {
-                element.addEventListener("click", () =>
-                    setThemeAttributes(
-                        "dark",
-                        "dark-logo",
-                        "light-logo",
-                        "moon",
-                        "sun",
-                    ),
-                );
-            });
-
-            document.querySelectorAll(".light-layout").forEach((element) => {
-                element.addEventListener("click", () =>
-                    setThemeAttributes(
-                        "light",
-                        "light-logo",
-                        "dark-logo",
-                        "sun",
-                        "moon",
-                    ),
-                );
-            });
-        }
-        handleTheme();
-        //****************************
-        // Theme card with border or shadow
-        //****************************
-        function handleCardLayout() {
-            function setCardAttribute(cardType) {
-                document.documentElement.setAttribute("data-card", cardType);
+          };
+          $(window).ready(setsidebartype);
+          $(window).on("resize", setsidebartype);
+          //****************************
+          /* This is for sidebartoggler*/
+          //****************************
+          $(".sidebartoggler").on("click", function () {
+            $("#main-wrapper").toggleClass("mini-sidebar");
+            if ($("#main-wrapper").hasClass("mini-sidebar")) {
+              $(".sidebartoggler").prop("checked", !0);
+              $("#main-wrapper").attr("data-sidebartype", "mini-sidebar");
+            } else {
+              $(".sidebartoggler").prop("checked", !1);
+              $("#main-wrapper").attr("data-sidebartype", "full");
             }
-
-            document
-                .getElementById("card-with-border")
-                .addEventListener("click", () => setCardAttribute("border"));
-            document
-                .getElementById("card-without-border")
-                .addEventListener("click", () => setCardAttribute("shadow"));
-        }
-        handleCardLayout();
+          });
+          $(".sidebartoggler").on("click", function () {
+            $("#main-wrapper").toggleClass("show-sidebar");
+            $(".sidebartoggler i").toggleClass("text-primary");
+            $(".fullsidebar i").addClass("text-dark");
+          });
+          $(".fullsidebar").on("click", function () {
+            $("#main-wrapper").attr("data-sidebartype", "full");
+            $(".fullsidebar i").removeClass("text-dark");
+            $(".fullsidebar i").addClass("text-primary");
+            $(".sidebartoggler i").removeClass("text-primary");
+          });
+          break;
 
         //****************************
-        // Theme sidebar
+        // If the sidebar type has mini-sidebar
         //****************************
-        function handleSidebarToggle() {
-            function setSidebarType(sidebarType) {
-                document.body.setAttribute("data-sidebartype", sidebarType);
+        case "mini-sidebar":
+          $("#" + myid).attr("data-sidebartype", "mini-sidebar");
+          //****************************
+          /* This is for sidebartoggler*/
+          //****************************
+          $(".sidebartoggler").on("click", function () {
+            $("#main-wrapper").toggleClass("mini-sidebar");
+            if ($("#main-wrapper").hasClass("mini-sidebar")) {
+              $(".sidebartoggler").prop("checked", !0);
+              $("#main-wrapper").attr("data-sidebartype", "full");
+            } else {
+              $(".sidebartoggler").prop("checked", !1);
+              $("#main-wrapper").attr("data-sidebartype", "mini-sidebar");
             }
+          });
+          $(".sidebartoggler").on("click", function () {
+            $("#main-wrapper").toggleClass("show-sidebar");
+          });
+          break;
 
-            document
-                .getElementById("full-sidebar")
-                .addEventListener("click", () => setSidebarType("full"));
-            document
-                .getElementById("mini-sidebar")
-                .addEventListener("click", () =>
-                    setSidebarType("mini-sidebar"),
-                );
-        }
-        handleSidebarToggle();
-        //****************************
-        // Toggle sidebar
-        //****************************
-        function handleSidebar() {
-            document
-                .querySelectorAll(".sidebartoggler")
-                .forEach(function (element) {
-                    element.addEventListener("click", function () {
-                        document
-                            .querySelectorAll(".sidebartoggler")
-                            .forEach(function (el) {
-                                el.checked = true;
-                            });
-                        document
-                            .getElementById("main-wrapper")
-                            .classList.toggle("show-sidebar");
-                        document
-                            .querySelectorAll(".sidebarmenu")
-                            .forEach(function (el) {
-                                el.classList.toggle("close");
-                            });
-                        var dataTheme =
-                            document.body.getAttribute("data-sidebartype");
-                        if (dataTheme === "full") {
-                            document.body.setAttribute(
-                                "data-sidebartype",
-                                "mini-sidebar",
-                            );
-                        } else {
-                            document.body.setAttribute(
-                                "data-sidebartype",
-                                "full",
-                            );
-                        }
-                    });
-                });
-        }
+        default:
+      }
+    },
 
-        //****************************
-        // Theme Onload Toast
-        //****************************
-        window.addEventListener("load", () => {
-            let myAlert = document.querySelectorAll(".toast")[0];
-            if (myAlert) {
-                let bsAlert = new bootstrap.Toast(myAlert);
-                bsAlert.show();
-            }
-        });
+    //****************************
+    // ManageSidebarPosition functions
+    //****************************
+    ManageSidebarPosition: function () {
+      var sidebarposition = settings.SidebarPosition;
+      var headerposition = settings.HeaderPosition;
+      switch (settings.Layout) {
+        case "vertical":
+          if (sidebarposition == true) {
+            $("#" + myid).attr("data-sidebar-position", "fixed");
+          } else {
+            $("#" + myid).attr("data-sidebar-position", "absolute");
+          }
+          if (headerposition == true) {
+            $("#" + myid).attr("data-header-position", "fixed");
+          } else {
+            $("#" + myid).attr("data-header-position", "relative");
+          }
+          break;
+        case "horizontal":
+          if (sidebarposition == true) {
+            $("#" + myid).attr("data-sidebar-position", "fixed");
+          } else {
+            $("#" + myid).attr("data-sidebar-position", "absolute");
+          }
+          if (headerposition == true) {
+            $("#" + myid).attr("data-header-position", "fixed");
+          } else {
+            $("#" + myid).attr("data-header-position", "relative");
+          }
+          break;
+        default:
+      }
+    },
+  };
+  AdminSettings.AdminSettingsInit();
+};
 
-        handleSidebar();
-    });
+/*Theme color change*/
+function toggleTheme(value) {
+  $(".preloader").show();
+  var sheets = document.getElementById("themeColors");
+  sheets.href = value;
+  $(".preloader").fadeOut();
 }
