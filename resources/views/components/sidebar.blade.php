@@ -3,7 +3,7 @@
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a
-                href="./index.html"
+                href="#"
                 class="text-nowrap logo-img"
             >
                 <img
@@ -39,10 +39,9 @@
 
                 <li class="sidebar-item">
                     <a
-                        class="sidebar-link"
-                        href="/dashboard"
+                        class="sidebar-link @active('dashboard')"
+                        href="{{ route('dashboard') }}"
                         aria-expanded="false"
-                        data-active="/dashboard"
                     >
                         <span><i class="ti ti-dashboard"></i></span>
                         <span class="hide-menu">Dashboard</span>
@@ -55,10 +54,9 @@
                 </li>
                 <li class="sidebar-item">
                     <a
-                        class="sidebar-link"
-                        href="/employees"
+                        class="sidebar-link @active('employees')"
+                        href="{{ route('employees') }}"
                         aria-expanded="false"
-                        data-active="/employees*"
                     >
                         <span><i class="ti ti-users-group"></i></span>
                         <span class="hide-menu">Data Pegawai</span>
