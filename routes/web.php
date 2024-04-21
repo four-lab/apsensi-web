@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Livewire\Auth\Login;
 use App\Livewire\Dashboard;
+use App\Livewire\EmployeePage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -12,6 +14,10 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', Dashboard::class)->name('dashboard');
+
+    Route::get('employees', EmployeePage::class)->name('employees');
+    Route::get('employees/datatables', EmployeeController::class)
+        ->name('employees.datatables');
 
     Route::get('logout', function () {
         Auth::logout();

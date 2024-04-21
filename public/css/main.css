@@ -1,0 +1,19 @@
+.photo-preview {
+    margin: auto;
+    width: 7.5rem;
+    aspect-ratio: 1/1;
+    border: 2px dashed #8f8f8f;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.photo-preview.is-invalid {
+    border: 2px dashed #fa896b;
+    color: #fa896b;
+}
