@@ -63,6 +63,17 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item">
+                    <a
+                        class="sidebar-link @active('classrooms')"
+                        href="{{ route('classrooms') }}"
+                        aria-expanded="false"
+                    >
+                        <span><i class="ti ti-chalkboard"></i></span>
+                        <span class="hide-menu">Data Kelas</span>
+                    </a>
+                </li>
+
                 {{-- <li class="sidebar-item">
                     <a
                         class="sidebar-link has-arrow"
