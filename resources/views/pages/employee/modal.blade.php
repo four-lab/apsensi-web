@@ -13,7 +13,7 @@
             wire:submit.prevent="save"
         >
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Pegawai</h5>
+                <h5 class="modal-title">{{ $this->form->employee ? 'Edit' : 'Tambah' }} Pegawai</h5>
                 <button
                     type="button"
                     class="btn-close"
