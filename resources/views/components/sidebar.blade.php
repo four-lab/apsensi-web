@@ -74,6 +74,18 @@
                     </a>
                 </li>
 
+                
+                <li class="sidebar-item">
+                    <a
+                        class="sidebar-link @active('subjects')"
+                        href="{{ route('subjects') }}"
+                        aria-expanded="false"
+                    >
+                        <span><i class="ti ti-notebook"></i></span>
+                        <span class="hide-menu">Mata Pelajaran</span>
+                    </a>
+                </li>
+
                 {{-- <li class="sidebar-item">
                     <a
                         class="sidebar-link has-arrow"
