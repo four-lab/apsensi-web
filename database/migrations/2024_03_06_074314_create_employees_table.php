@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->string('fullname', 100);
             $table->string('birthplace', 75);
             $table->date('birthdate');
-            $table->json('photos')->default('{}');
+            $table->json('photos')->default(new Expression('JSON_ARRAY()'));
             $table->enum('gender', ['male', 'female']);
             $table->longText('address');
             $table->timestamps();
