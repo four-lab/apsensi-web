@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HolidayController;
 use App\Livewire\Auth\Login;
 use App\Livewire\ClassroomPage;
 use App\Livewire\Dashboard;
 use App\Livewire\EmployeePage;
+use App\Livewire\HolidayPage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -24,6 +26,10 @@ Route::middleware('auth')->group(function () {
     Route::get('classrooms', ClassroomPage::class)->name('classrooms');
     Route::get('classrooms/datatables', ClassroomController::class)
         ->name('classrooms.datatables');
+
+    Route::get('holidays', HolidayPage::class)->name('holidays');
+    Route::get('holidays/json', [HolidayController::class, 'json'])
+        ->name('holidays.json');
 
     Route::get('logout', function () {
         Auth::logout();

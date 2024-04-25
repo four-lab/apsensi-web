@@ -74,6 +74,21 @@
                     </a>
                 </li>
 
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Presensi</span>
+                </li>
+                <li class="sidebar-item">
+                    <a
+                        class="sidebar-link @active('holidays')"
+                        href="{{ route('holidays') }}"
+                        aria-expanded="false"
+                    >
+                        <span><i class="ti ti-calendar-event"></i></span>
+                        <span class="hide-menu">Hari Libur</span>
+                    </a>
+                </li>
+
                 {{-- <li class="sidebar-item">
                     <a
                         class="sidebar-link has-arrow"
