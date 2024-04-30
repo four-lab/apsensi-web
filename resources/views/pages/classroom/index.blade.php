@@ -50,6 +50,7 @@
                 serverSide: true,
                 processing: true,
                 ajax: '{{ route('classrooms.datatables') }}',
+                
                 columns: [{
                     data: 'DT_RowIndex',
                     searchable: false,

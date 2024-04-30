@@ -13,6 +13,14 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap5.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/2.0.5/i18n/id.json"></script>
+<script>
+    Object.assign(DataTable.defaults, {
+        language: {
+            url: '{{ asset('datatables-id.json') }}',
+        },      
+    })
+</script>
 
 @livewireScripts
 @stack('script')
