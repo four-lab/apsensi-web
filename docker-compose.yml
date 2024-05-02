@@ -2,8 +2,8 @@ services:
     app:
         build:
             args:
-                user: irsyadulibad
-                uid: 1000
+                user: ${DOCKER_USER}
+                uid: ${DOCKER_UID}
             context: .
             dockerfile: Dockerfile
         extra_hosts:
