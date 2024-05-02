@@ -74,6 +74,17 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item">
+                    <a
+                        class="sidebar-link @active('subjects')"
+                        href="{{ route('subjects') }}"
+                        aria-expanded="false"
+                    >
+                        <span><i class="ti ti-notebook"></i></span>
+                        <span class="hide-menu">Mata Pelajaran</span>
+                    </a>
+                </li>
+
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Presensi</span>

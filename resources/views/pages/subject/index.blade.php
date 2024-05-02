@@ -1,5 +1,5 @@
 <div class="row">
-    <x-slot:title>Data Kelas</x-slot:title>
+    <x-slot:title>Data Mapel</x-slot:title>
     <x-slot:navigation>
         <li
             class="breadcrumb-item"
@@ -14,8 +14,8 @@
                     <button
                         class="btn btn-primary mb-4"
                         data-bs-toggle="modal"
-                        data-bs-target="#classroom-modal"
-                    ><i class="fas fa-plus me-1"></i> Tambah Kelas</button>
+                        data-bs-target="#subject-modal"
+                    ><i class="fas fa-plus me-1"></i> Tambah Mapel</button>
                 </div>
 
                 <div
@@ -24,12 +24,13 @@
                 >
                     <table
                         class="table table-striped table-bordered text-nowrap"
-                        id="classrooms-table"
+                        id="subjects-table"
                     >
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nama Kelas</th>
+                                <th>Nama Mapel</th>
+                                <th>Maksimal Keterlambatan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -39,18 +40,17 @@
         </div>
     </div>
 
-    @include('pages.classroom.modal')
+    @include('pages.subject.modal')
 
     @push('script')
         <script>
-            const modalElement = document.getElementById('classroom-modal');
+            const modalElement = document.getElementById('subject-modal');
             const modal = new bootstrap.Modal(modalElement);
 
-            const classTable = $('#classrooms-table').DataTable({
+            const classTable = $('#subjects-table').DataTable({
                 serverSide: true,
                 processing: true,
-                ajax: '{{ route('classrooms.datatables') }}',
-                
+                ajax: '{{ route('subjects.datatables') }}',
                 columns: [{
                     data: 'DT_RowIndex',
                     searchable: false,
@@ -58,6 +58,10 @@
                 }, {
                     data: 'name',
                     name: 'name',
+                },
+                {
+                    data: 'max_lateness',
+                    name: 'max_lateness',
                 }, {
                     data: 'action',
                     searchable: false,
@@ -65,7 +69,7 @@
                 }]
             });
 
-            Livewire.on('classroom-saved', () => {
+            Livewire.on('subject-saved', () => {
                 classTable.ajax.reload();
                 modal.hide();
             });
@@ -75,12 +79,12 @@
             });
 
             modalElement.addEventListener('hidden.bs.modal', () => {
-                Livewire.dispatch('classroom-cleared');
+                Livewire.dispatch('subject-cleared');
             });
 
-            $('#classrooms-table tbody').on('click', '.btn-delete', function() {
+            $('#subjects-table tbody').on('click', '.btn-delete', function() {
                 showConfirmation('Data kelas tidak dapat dikembalikan', () => {
-                    Livewire.dispatch('classroom-delete', {
+                    Livewire.dispatch('subject-delete', {
                         id: $(this).data('id')
                     });
                 });
