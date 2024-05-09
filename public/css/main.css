@@ -17,3 +17,55 @@
     border: 2px dashed #fa896b;
     color: #fa896b;
 }
+
+.calendar-bg-danger {
+    background-color: #e74c3c;
+    color: #fff;
+    border-color: #c0392b;
+}
+
+.calendar-bg-success {
+    background-color: #2ecc71;
+    color: #fff;
+    border-color: #27ae60;
+}
+
+.calendar-bg-danger:hover {
+    background-color: #c0392b;
+    color: #fff;
+    border-color: #e74c3c;
+}
+
+.calendar-bg-success:hover {
+    background-color: #27ae60;
+    color: #fff;
+    border-color: #2ecc71;
+}
+
+.calendar-bg-danger .fc-daygrid-event-dot {
+    margin-left: 5px;
+    border: calc(var(--fc-daygrid-event-dot-width) / 2) solid white;
+}
+
+.calendar-bg-success .fc-daygrid-event-dot {
+    margin-left: 5px;
+    border: calc(var(--fc-daygrid-event-dot-width) / 2) solid white;
+}
+
+.fc-event-time {
+    display: none;
+}
+
+#calendar-loader {
+    position: absolute;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

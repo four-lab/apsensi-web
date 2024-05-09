@@ -27,10 +27,12 @@
                         name="form.name"
                         label="Nama Mapel"
                     />
+                </div>
+                <div class="mb-3">
                     <x-form.input
-                    name="form.max_lateness"
-                    label="Maksimal Keterlambatan"
-                />
+                        name="form.max_lateness"
+                        label="Maksimal Keterlambatan"
+                    />
                 </div>
             </div>
             <div class="modal-footer">
