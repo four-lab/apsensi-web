@@ -79,6 +79,7 @@
                                 type="password"
                                 name="form.password"
                                 label="Password"
+                                placeholder="{{ $this->form->employee ? 'Kosongkan jika tidak diubah' : 'Minimal 8 karakter' }}"
                             />
                         </div>
                         <div class="col-12 mb-3">

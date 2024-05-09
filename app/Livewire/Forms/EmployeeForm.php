@@ -32,13 +32,13 @@ class EmployeeForm extends Form
     public function rules(): array
     {
         $rules = [
-            'fullname' => 'required',
-            'birthplace' => 'required',
+            'fullname' => 'required|regex:/^[\p{L}\s\']+$/u',
+            'birthplace' => 'required|alpha',
             'birthdate' => 'required|date',
             'address' => 'required',
             'nik' => [
                 'required',
-                'min:16',
+                'digits:16',
                 'regex:/^[0-9]+$/',
                 Rule::unique('employees', 'nik')->ignore($this->employee),
             ],
@@ -48,6 +48,7 @@ class EmployeeForm extends Form
             ],
             'username' => [
                 'required',
+                'regex:/^[\w.]+$/',
                 Rule::unique('employees', 'username')->ignore($this->employee),
             ],
             'gender' => [
@@ -58,7 +59,7 @@ class EmployeeForm extends Form
 
         if (!$this->employee)
             return array_merge($rules, [
-                'password' => 'required',
+                'password' => 'required|min:8',
                 'photos.front' => 'required|image|mimes:jpeg,png,jpg',
                 'photos.left' => 'required|image|mimes:jpeg,png,jpg',
                 'photos.right' => 'required|image|mimes:jpeg,png,jpg',

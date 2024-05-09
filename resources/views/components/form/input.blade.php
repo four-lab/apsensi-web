@@ -6,6 +6,7 @@
     type="{{ $type ?? 'text' }}"
     class="form-control @error($name) is-invalid @enderror"
     id="{{ $name }}"
+    placeholder="{{ $placeholder ?? '' }}"
     wire:model="{{ $name }}"
 >
 
