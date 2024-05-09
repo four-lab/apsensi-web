@@ -16,7 +16,10 @@
             ><i class="fas fa-plus me-1"></i> Tambah Hari Libur</button>
         </div>
         <div class="card">
-            <div class="card-body calendar-sidebar app-calendar">
+            <div
+                class="card-body calendar-sidebar app-calendar"
+                wire:ignore
+            >
                 <div id="calendar-loader">
                     <div class="spinner-border spinner-border-lg"></div>
                 </div>
@@ -33,6 +36,9 @@
             const calendarLoader = $('#calendar-loader');
             const calendarElement = document.getElementById('calendar');
 
+            const modalElement = document.getElementById('holiday-modal');
+            const modal = new bootstrap.Modal(modalElement);
+
             const calendar = new FullCalendar.Calendar(calendarElement, {
                 locale: 'id',
                 initialView: 'dayGridMonth',
@@ -41,7 +47,11 @@
                     center: "title",
                     right: "dayGridMonth,timeGridWeek,timeGridDay",
                 },
-                eventClick: () => {},
+                eventClick: (info) => {
+                    Livewire.dispatch('holiday-edit', {
+                        id: info.event.id
+                    });
+                },
                 eventClassNames: function({
                     event: calendarEvent
                 }) {
@@ -85,6 +95,31 @@
                 const month = calendar.getDate().getMonth() + 1;
                 const year = calendar.getDate().getFullYear();
 
+                renderEvents(month, year);
+            });
+
+            $('#holiday-modal').on('click', '.btn-delete', function() {
+                showConfirmation('Data libur tidak dapat dikembalikan', () => {
+                    modal.hide();
+                    Livewire.dispatch('holiday-delete', {
+                        id: $(this).data('id')
+                    });
+                });
+            });
+
+            modalElement.addEventListener('hidden.bs.modal', () => {
+                Livewire.dispatch('holiday-cleared');
+            });
+
+            Livewire.on('show-modal', () => {
+                modal.show();
+            });
+
+            Livewire.on('holiday-saved', () => {
+                const month = calendar.getDate().getMonth() + 1;
+                const year = calendar.getDate().getFullYear();
+
+                modal.hide();
                 renderEvents(month, year);
             });
 
