@@ -18,6 +18,7 @@ class SubjectForm extends Form
         return [
             'name' => [
                 'required',
+                'regex:/^[\p{L}\d\s\'()\x27\x28\x29]+$/u',
                 Rule::unique('subjects', 'name')->ignore($this->subject),
             ],
             'max_lateness' => 'required|integer|min:0|max:60',

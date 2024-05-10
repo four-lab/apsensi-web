@@ -17,6 +17,7 @@ class ClassroomForm extends Form
         return [
             'name' => [
                 'required',
+                'regex:/^[\p{L}\d\s]+$/u',
                 Rule::unique('classrooms', 'name')->ignore($this->classroom),
             ],
         ];
