@@ -4,10 +4,11 @@
 >{{ $label }}</label>
 
 <select
-    wire:model="{{ $name }}"
+    wire:model.change="{{ $name }}"
     id="{{ $name }}"
     class="form-control @error($name) is-invalid @enderror"
 >
+    <option value="">-- Pilih --</option>
     @foreach ($items as $key => $value)
         <option value="{{ $key }}">{{ $value }}</option>
     @endforeach
