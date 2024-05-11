@@ -9,7 +9,9 @@ use App\Livewire\ClassroomPage;
 use App\Livewire\Dashboard;
 use App\Livewire\EmployeePage;
 use App\Livewire\HolidayPage;
+use App\Livewire\Schedule\ScheduleCreate;
 use App\Livewire\SubjectPage;
+use App\Livewire\Schedule\SchedulePage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -36,6 +38,10 @@ Route::middleware('auth')->group(function () {
     Route::get('subjects', SubjectPage::class)->name('subjects');
     Route::get('subjects/datatables', SubjectController::class)
         ->name('subjects.datatables');
+
+    Route::get('schedules', SchedulePage::class)->name('schedules');
+    Route::get('schedules/{classroom}/create', ScheduleCreate::class)
+        ->name('schedules.create');
 
     Route::get('logout', function () {
         Auth::logout();

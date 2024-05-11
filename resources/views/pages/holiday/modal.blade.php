@@ -5,10 +5,7 @@
     data-bs-keyboard="false"
     wire:ignore.self
 >
-    <div
-        class="modal-dialog modal-dialog-scrollable"
-        id="holiday-modal"
-    >
+    <div class="modal-dialog modal-dialog-scrollable">
         <form
             class="modal-content"
             method="POST"
