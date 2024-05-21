@@ -15,3 +15,15 @@ if (!function_exists('save_setting')) {
         return app(SettingRepository::class)->set($key, $value);
     }
 }
+
+if (!function_exists('obfuscate_email')) {
+    function obfuscate_email(string $email)
+    {
+        $parts = explode('@', $email);
+        $domain = array_pop($parts);
+        $name = implode('@', $parts);
+        $hiddenName = str_repeat('*', strlen($name));
+
+        return $hiddenName . '@' . $domain;
+    }
+}

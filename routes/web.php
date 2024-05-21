@@ -4,7 +4,9 @@ use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\SubjectController;
+use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\Login;
+use App\Livewire\Auth\ResetPassword;
 use App\Livewire\ClassroomPage;
 use App\Livewire\Dashboard;
 use App\Livewire\EmployeePage;
@@ -18,6 +20,8 @@ use Illuminate\Support\Facades\Session;
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)->name('login');
+    Route::get('forgot-password', ForgotPassword::class)->name('forgot-pass');
+    Route::get('reset-password', ResetPassword::class)->name('reset-pass');
 });
 
 Route::middleware('auth')->group(function () {
