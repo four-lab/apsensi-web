@@ -44,8 +44,9 @@
                                 @for ($i = 0; $i < 6; $i++)
                                     <input
                                         type="text"
-                                        class="form-control"
+                                        class="form-control code-input"
                                         placeholder=""
+                                        maxLength="1"
                                         wire:model="code.{{ $i }}"
                                     >
                                 @endfor
@@ -58,14 +59,16 @@
                             type="submit"
                             class="btn btn-primary w-100 py-8 mb-4"
                         >Verifikasi</button>
-                        <div class="d-flex align-items-center">
-                            <p class="fs-4 mb-0 text-dark">Tidak mendapatkan kode?</p>
-                            <a
-                                class="text-primary fw-medium ms-2"
-                                href="#"
-                                wire:click.prevent="resend"
-                            >kirim ulang</a>
-                        </div>
+                        @if ($canResend)
+                            <div class="d-flex align-items-center">
+                                <p class="fs-4 mb-0 text-dark">Tidak mendapatkan kode?</p>
+                                <a
+                                    class="text-primary fw-medium ms-2"
+                                    href="#"
+                                    wire:click.prevent="resend"
+                                >kirim ulang</a>
+                            </div>
+                        @endif
                     </form>
                 @endif
             </div>
@@ -74,6 +77,23 @@
 
     @push('script')
         <script>
+            $('.code-input').keyup(function(e) {
+                const numberRegex = /^[0-9]$/;
+
+                if (!numberRegex.test(e.key))
+                    return;
+
+                if (this.value.length < this.maxLength)
+                    return;
+
+                $(this).next().focus();
+            });
+
+            $('.code-input').keydown(function(e) {
+                if (e.key == 'ArrowLeft')
+                    $(this).prev().focus();
+            });
+
             Livewire.on('otp-error', (msg) => {
                 toastr.error(msg[0], {
                     timeOut: 1000,

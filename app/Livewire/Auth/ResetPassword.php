@@ -15,6 +15,7 @@ class ResetPassword extends Component
 {
     public $verified = false;
     public $email = null;
+    public $canResend = true;
 
     #[Validate('required|array|size:6')]
     public $code = [];
@@ -44,6 +45,7 @@ class ResetPassword extends Component
         $user = User::where('email', $this->email)->first();
         OtpRepository::send($user);
 
+        $this->canResend = false;
         $this->dispatch('otp-sent');
     }
 
