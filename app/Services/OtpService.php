@@ -9,7 +9,7 @@ use App\Models\User;
 
 class OtpService
 {
-    public static function verify(User|Employee $user, string $otp)
+    public static function verify(User|Employee $user, string $otp, bool $isDeleted = true)
     {
         $otp = Otp::where([
             'model_type' => $user::class,
@@ -25,7 +25,9 @@ class OtpService
             return throw new OtpException('Kode OTP Telah Kadaluarsa');
         }
 
-        $otp->delete();
+        if ($isDeleted)
+            $otp->delete();
+
         return true;
     }
 }
