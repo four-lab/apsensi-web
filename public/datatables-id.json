@@ -1,7 +1,7 @@
 {
     "emptyTable": "Tidak ada data yang tersedia pada tabel ini",
     "info": "Menampilkan _START_ - _END_ dari _TOTAL_ hasil",
-    "infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+    "infoEmpty": "Menampilkan 0 - 0 dari 0 hasil",
     "infoFiltered": "",
     "lengthMenu": "Menampilkan _MENU_ hasil",
     "loadingRecords": "Sedang memuat...",
