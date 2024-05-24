@@ -36,7 +36,7 @@
                     </div>
                     <a
                         class="text-primary fw-medium fs-3"
-                        href="#"
+                        href="{{ route('forgot-pass') }}"
                     >Lupa Password?</a>
                 </div>
                 <button
