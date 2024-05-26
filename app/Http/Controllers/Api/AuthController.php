@@ -12,6 +12,7 @@ use App\Models\Employee;
 use App\Repos\OtpRepository;
 use App\Services\OtpService;
 use App\Traits\ApiResponser;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -33,6 +34,13 @@ class AuthController extends Controller
         }
 
         return $this->error(message: 'Username atau password salah', code: 401);
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
+
+        return $this->success(message: 'Berhasil logout');
     }
 
     public function forgotPassword(ForgotPassRequest $request)

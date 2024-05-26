@@ -24,4 +24,5 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('forgot-password', 'forgotPassword')->name('forgot-password');
     Route::post('verify-code', 'verifyCode')->name('verify-code');
     Route::post('reset-password', 'resetPassword')->name('reset-password');
+    Route::delete('logout', 'logout')->middleware('auth:sanctum')->name('logout');
 });
