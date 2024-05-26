@@ -42,4 +42,21 @@ class SchoolPage extends Component
     {
         $this->coordinates[] = [$lat, $long];
     }
+
+    #[On('clear-coordinates')]
+    public function clearCoordinates()
+    {
+        $this->coordinates = [];
+    }
+
+    #[On('undoredo-coordinate')]
+    public function undoCoordinate($lat = null, $long = null)
+    {
+        if (is_null($lat) && is_null($long)) {
+            array_pop($this->coordinates);
+            return;
+        }
+
+        $this->coordinates[] = [$lat, $long];
+    }
 }

@@ -122,7 +122,7 @@
                         aria-expanded="false"
                     >
                         <span><i class="ti ti-building"></i></span>
-                        <span class="hide-menu">Tentang Sekolah</span>
+                        <span class="hide-menu">Profil Sekolah</span>
                     </a>
                 </li>
 
