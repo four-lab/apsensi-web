@@ -111,6 +111,21 @@
                     </a>
                 </li>
 
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Pengaturan</span>
+                </li>
+                <li class="sidebar-item">
+                    <a
+                        class="sidebar-link @active('settings.school')"
+                        href="{{ route('settings.school') }}"
+                        aria-expanded="false"
+                    >
+                        <span><i class="ti ti-building"></i></span>
+                        <span class="hide-menu">Profil Sekolah</span>
+                    </a>
+                </li>
+
                 {{-- <li class="sidebar-item">
                     <a
                         class="sidebar-link has-arrow"
