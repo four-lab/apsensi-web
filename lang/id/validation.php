@@ -16,8 +16,8 @@ return [
     'accepted' => 'The :attribute field must be accepted.',
     'accepted_if' => 'The :attribute field must be accepted when :other is :value.',
     'active_url' => 'The :attribute field must be a valid URL.',
-    'after' => 'The :attribute field must be a date after :date.',
-    'after_or_equal' => 'The :attribute field must be a date after or equal to :date.',
+    'after' => ':attribute harus setelah :date.',
+    'after_or_equal' => ':attribute harus setelah atau sama dengan :date.',
     'alpha' => ':attribute tidak valid.',
     'alpha_dash' => 'The :attribute field must only contain letters, numbers, dashes, and underscores.',
     'alpha_num' => 'The :attribute field must only contain letters and numbers.',
@@ -200,8 +200,16 @@ return [
         'photos.right' => 'Foto',
 
         'name' => 'Nama Kelas',
-        'course_name' => 'Nama Mapel',
+
         'max_lateness' => 'Maksimal Keterlamatan',
+
+        'subject_id' => 'Mata Pelajaran',
+        'employee_id' => 'Guru Pengajar',
+        'time_start' => 'Jam Mulai',
+        'time_end' => 'Jam Akhir',
+
+        'date_start' => 'Tanggal Mulai',
+        'date_end' => 'Tanggal Akhir',
     ],
 
 ];
