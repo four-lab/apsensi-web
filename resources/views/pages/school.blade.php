@@ -122,6 +122,15 @@
             let coordinates = @json($coordinates);
             let polygon = L.polygon(coordinates).addTo(map);
 
+            function setMapCenter() {
+                if (coordinates.length < 1) return;
+
+                const turfPolygon = turf.polygon([coordinates]);
+                const coordinate = turf.center(turfPolygon).geometry.coordinates;
+
+                map.panTo(new L.LatLng(coordinate[0], coordinate[1]));
+            }
+
             function updatePolygon() {
                 map.removeLayer(polygon);
                 polygon = L.polygon(coordinates).addTo(map);
@@ -202,6 +211,8 @@
 
             $('#undo-btn').click(() => undo());
             $('#redo-btn').click(() => redo());
+
+            setMapCenter();
         </script>
     @endpush
 </div>
