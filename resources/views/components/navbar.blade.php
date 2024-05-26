@@ -1,4 +1,7 @@
-<header class="app-header">
+<header
+    class="app-header"
+    style="z-index: 9999;"
+>
     <nav class="navbar navbar-expand-lg navbar-light">
         <ul class="navbar-nav">
             <li class="nav-item">
