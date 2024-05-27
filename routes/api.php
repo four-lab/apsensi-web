@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\HolidayController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('verify-code', 'verifyCode')->name('verify-code');
     Route::post('reset-password', 'resetPassword')->name('reset-password');
     Route::delete('logout', 'logout')->middleware('auth:sanctum')->name('logout');
+});
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('holidays', [HolidayController::class, 'index'])->name('holidays');
 });
