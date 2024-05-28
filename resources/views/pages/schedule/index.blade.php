@@ -53,9 +53,11 @@
                                 <td class="p-1">
                                     @forelse ($schedule as $sch)
                                         <div class="bg-light-primary text-black px-2 py-2 schedule-content">
-                                            <small class="schedule-time">10:00:00 - 11:00:00</small>
-                                            <p class="fw-bold m-0 fs-4">PPKn</p>
-                                            <small>Ahmad Irsyadul 'Ibad</small>
+                                            <small class="schedule-time">
+                                                {{ $sch->time_start }} - {{ $sch->time_end }}
+                                            </small>
+                                            <p class="fw-bold m-0 fs-4">{{ $sch->subject->name }}</p>
+                                            <small>{{ $sch->employee->fullname }}</small>
                                         </div>
                                     @empty
                                         <div
