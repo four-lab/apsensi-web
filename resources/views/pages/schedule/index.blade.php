@@ -51,7 +51,7 @@
                         <tr>
                             @foreach ($this->schedules as $schedule)
                                 <td class="p-1">
-                                    @forelse ($schedule as $sch)
+                                    @foreach ($schedule as $sch)
                                         <div class="bg-light-primary text-black px-2 py-2 schedule-content">
                                             <small class="schedule-time">
                                                 {{ $sch->time_start }} - {{ $sch->time_end }}
@@ -59,14 +59,16 @@
                                             <p class="fw-bold m-0 fs-4">{{ $sch->subject->name }}</p>
                                             <small>{{ $sch->employee->fullname }}</small>
                                         </div>
-                                    @empty
+                                    @endforeach
+
+                                    @if (count($schedule) < 1)
                                         <div
                                             class="d-flex align-items-center justify-content-center"
                                             style="padding-top: 50%; padding-bottom: 50%;"
                                         >
                                             <small class="text-center">Tidak ada jadwal<small>
                                         </div>
-                                    @endforelse
+                                    @endif
                                 </td>
                             @endforeach
                         </tr>
