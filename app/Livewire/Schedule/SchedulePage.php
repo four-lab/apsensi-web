@@ -15,6 +15,7 @@ class SchedulePage extends Component
     public function mount()
     {
         $this->classrooms = Classroom::all();
+        $this->classId = $this->classrooms->first()->id;
     }
 
     public function render()
