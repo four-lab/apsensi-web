@@ -1,6 +1,6 @@
 <aside
     class="left-sidebar"
-    style="z-index: 99999;"
+    style="z-index: 10000;"
 >
     <!-- Sidebar scroll-->
     <div>

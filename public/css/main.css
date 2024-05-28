@@ -1,3 +1,11 @@
+.modal {
+    z-index: 10002;
+}
+
+.modal-backdrop {
+    z-index: 10001;
+}
+
 .photo-preview {
     margin: auto;
     width: 7.5rem;
