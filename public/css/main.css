@@ -6,6 +6,10 @@
     z-index: 10001;
 }
 
+.swal2-container {
+    z-index: 10003;
+}
+
 .photo-preview {
     margin: auto;
     width: 7.5rem;
