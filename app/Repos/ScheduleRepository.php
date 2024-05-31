@@ -33,9 +33,7 @@ class ScheduleRepository
         $day = date('N', $timestamp);
 
         return Schedule::where('day', $day)
-            ->with('subject')
-            ->with('employee')
-            ->with('classroom')
+            ->with('subject', 'employee', 'classroom')
             ->get();
     }
 }
