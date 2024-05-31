@@ -26,4 +26,16 @@ class ScheduleRepository
 
         return Schedule::create($data);
     }
+
+    public static function getByDate(string $date)
+    {
+        $timestamp = strtotime($date);
+        $day = date('N', $timestamp);
+
+        return Schedule::where('day', $day)
+            ->with('subject')
+            ->with('employee')
+            ->with('classroom')
+            ->get();
+    }
 }

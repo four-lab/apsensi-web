@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\HolidayController;
+use App\Http\Controllers\Api\ScheduleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +32,5 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('holidays', [HolidayController::class, 'index'])->name('holidays');
+    Route::get('schedules', [ScheduleController::class, 'index'])->name('schedules');
 });
