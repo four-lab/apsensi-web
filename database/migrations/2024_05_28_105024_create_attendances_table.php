@@ -15,11 +15,14 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->constrained();
+            $table->foreignId('classroom_id')->constrained();
             $table->foreignId('subject_id')->constrained();
+            $table->time('subject_start');
+            $table->time('subject_end');
             $table->date('date');
-            $table->time('time_start');
-            $table->time('time_end');
-            $table->enum('status', AttendanceStatus::values());
+            $table->time('time_start')->nullable();
+            $table->time('time_end')->nullable();
+            $table->enum('status', AttendanceStatus::values())->nullable();
         });
     }
 
