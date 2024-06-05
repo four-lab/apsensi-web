@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\HolidayController;
 use App\Http\Controllers\Api\ScheduleController;
+use App\Http\Controllers\Api\ExcusesController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,11 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('holidays', [HolidayController::class, 'index'])->name('holidays');
     Route::get('schedules', [ScheduleController::class, 'index'])->name('schedules');
+   
+    Route::prefix('/excuses')->name('excuses.')->group(function () {
+        Route::get('/', [ExcusesController::class, 'index'])->name('index');
+        Route::post('/create', [ExcusesController::class, 'create'])->name('create');
+    });
 
     Route::prefix('user')->controller(UserController::class)->group(function () {
         Route::get('/', 'show')->name('user');
