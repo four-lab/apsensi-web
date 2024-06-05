@@ -12,27 +12,10 @@ class ExcusesRepository
     {
         return Excuses::all();
     }
-    public static function create(object $data) : object
+    public static function create(array $data) : Excuses
     {
-        try{
-            $validator = Validator::make($data,
-            [
-               'type' => 'required',
-               'status' => 'required',
-               'description' => 'required|max:225',
-            ]);
+        $data['document'] = $data['document']->store('public/excuses');
 
-            if($validator->fails()) return response(422)->json($validator->errors(), 422);
-
-            $file = $data->file('document');
-            $file->storageAs('public/documents', $data->name);
-
-            $excuses = Excuses::create($data);
-
-            return $excuses;
-
-        }catch (\Exception $error){
-            return  response(400)->json($error->getMessage(), 400);
-        }
+        return Excuses::create($data);       
     }
 }
