@@ -31,6 +31,6 @@ class ManageAttendance extends Command
 
         $repo->insertDaily($date);
         $repo->makeAbsent($date);
-        $repo->endUfinished($date);
+        $repo->endUnfinished($date);
     }
 }
