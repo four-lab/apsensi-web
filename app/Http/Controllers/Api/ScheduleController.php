@@ -17,7 +17,7 @@ class ScheduleController extends Controller
         $date = $request->date ?? date('Y-m-d');
 
         return $this->success(ScheduleResource::collection(
-            ScheduleRepository::getByDate($date)
+            ScheduleRepository::getByDate($date, $request->user())
         ));
     }
 }

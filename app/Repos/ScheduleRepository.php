@@ -3,6 +3,7 @@
 namespace App\Repos;
 
 use App\Exceptions\ScheduleException;
+use App\Models\Employee;
 use App\Models\Schedule;
 
 class ScheduleRepository
@@ -27,13 +28,17 @@ class ScheduleRepository
         return Schedule::create($data);
     }
 
-    public static function getByDate(string $date)
+    public static function getByDate(string $date, ?Employee $employee = null)
     {
         $timestamp = strtotime($date);
         $day = date('N', $timestamp);
 
-        return Schedule::where('day', $day)
-            ->with('subject', 'employee', 'classroom')
-            ->get();
+        $schedule =  Schedule::where('day', $day)
+            ->with('subject', 'employee', 'classroom');
+
+        if ($employee)
+            $schedule = $schedule->where('employee_id', $employee->id);
+
+        return $schedule->get();
     }
 }
