@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AttendanceController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\HolidayController;
 use App\Http\Controllers\Api\ScheduleController;
@@ -30,6 +31,13 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('holidays', [HolidayController::class, 'index'])->name('holidays');
     Route::get('schedules', [ScheduleController::class, 'index'])->name('schedules');
+
+    Route::prefix('attendances')->name('attendance.')
+        ->controller(AttendanceController::class)->group(function () {
+            Route::get('status', 'status')->name('status');
+            Route::post('attempt', 'attempt')->name('attempt');
+            Route::post('valid-area', 'validArea')->name('valid-area');
+        });
 
     Route::prefix('user')->controller(UserController::class)->group(function () {
         Route::get('/', 'show')->name('user');
