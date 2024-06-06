@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AttendanceController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\HolidayController;
 use App\Http\Controllers\Api\ScheduleController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,10 +18,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware('auth:sanctum')->get('user', function (Request $request) {
-    return $request->user();
-});
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login')->name('login');
@@ -41,4 +38,9 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('attempt', 'attempt')->name('attempt');
             Route::post('valid-area', 'validArea')->name('valid-area');
         });
+
+    Route::prefix('user')->controller(UserController::class)->group(function () {
+        Route::get('/', 'show')->name('user');
+        Route::match(['put', 'patch'], '/', 'update')->name('user.update');
+    });
 });
