@@ -74,6 +74,7 @@ class AttendanceRepository
             'canAttempt' => $canAttempt,
             'alreadyScanned' => $attemptedAttendance,
             'isActive' => $isActive,
+            'attendance' => $activeSchedule,
         ];
     }
 

@@ -35,8 +35,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('holidays', [HolidayController::class, 'index'])->name('holidays');
     Route::get('schedules', [ScheduleController::class, 'index'])->name('schedules');
 
-    Route::prefix('attendances')->name('attendance')
+    Route::prefix('attendances')->name('attendance.')
         ->controller(AttendanceController::class)->group(function () {
             Route::get('status', 'status')->name('status');
+            Route::post('attempt', 'attempt')->name('attempt');
         });
 });
