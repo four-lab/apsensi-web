@@ -30,8 +30,21 @@ class AttendanceController extends Controller
         );
     }
 
+    public function validArea(AttendanceRequest $request)
+    {
+        $isValid = $this->attService->validArea(
+            $request->latitude,
+            $request->longitude
+        );
+
+        return $this->success(compact('isValid'));
+    }
+
     public function attempt(AttendanceRequest $request)
     {
+        if (!$this->attService->validArea($request->latitude, $request->longitude))
+            return $this->error(message: 'Anda berada di luar area');
+
         try {
             $this->attService->attempt($request->user(), $request->file('image'));
             return $this->success(message: 'Presensi Berhasil dilakukan');

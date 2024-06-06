@@ -9,6 +9,8 @@ use App\Repos\AttendanceRepository;
 use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Http;
+use Location\Coordinate;
+use Location\Polygon;
 
 class AttendanceService
 {
@@ -48,6 +50,18 @@ class AttendanceService
             'time_start' => date('H:i:s'),
             'status' => $attStatus,
         ]);
+    }
+
+    public function validArea(string $latitude, string $longitude): bool
+    {
+        $coordinates = setting('school.coordinates', true) ?? [];
+        $geofence = new Polygon();
+
+        array_map(function ($coord) use ($geofence) {
+            $geofence->addPoint(new Coordinate($coord[0], $coord[1]));
+        }, $coordinates);
+
+        return $geofence->contains(new Coordinate($latitude, $longitude));
     }
 
     private function verifyFace(Employee $employee, UploadedFile $file)

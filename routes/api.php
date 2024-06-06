@@ -39,5 +39,6 @@ Route::middleware('auth:sanctum')->group(function () {
         ->controller(AttendanceController::class)->group(function () {
             Route::get('status', 'status')->name('status');
             Route::post('attempt', 'attempt')->name('attempt');
+            Route::post('valid-area', 'validArea')->name('valid-area');
         });
 });
