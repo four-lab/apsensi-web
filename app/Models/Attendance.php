@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\AttendanceStatus;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,6 +29,26 @@ class Attendance extends Model
     protected $casts = [
         'status' => AttendanceStatus::class,
     ];
+
+    public function startAttendanceTime(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Carbon::createFromFormat(
+                'Y-m-d H:i:s',
+                "{$this->date} {$this->subject_start}"
+            ),
+        );
+    }
+
+    public function endAttendanceTime(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Carbon::createFromFormat(
+                'Y-m-d H:i:s',
+                "{$this->date} {$this->subject_end}"
+            ),
+        );
+    }
 
     public function employee()
     {

@@ -105,8 +105,8 @@
                 </li>
                 <li class="sidebar-item">
                     <a
-                        class="sidebar-link @active('holidays')"
-                        href="{{ route('holidays') }}"
+                        class="sidebar-link @active('attendances')"
+                        href="{{ route('attendances') }}"
                         aria-expanded="false"
                     >
                         <span><i class="ti ti-list-details"></i></span>

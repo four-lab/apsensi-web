@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\AttendanceEvent;
 use App\Exceptions\AttendanceException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\AttendanceRequest;
@@ -47,6 +48,8 @@ class AttendanceController extends Controller
 
         try {
             $this->attService->attempt($request->user(), $request->file('image'));
+            AttendanceEvent::dispatch();
+
             return $this->success(message: 'Presensi Berhasil dilakukan');
         } catch (AttendanceException $e) {
             return $this->error(message: $e->getMessage(), code: 401);
