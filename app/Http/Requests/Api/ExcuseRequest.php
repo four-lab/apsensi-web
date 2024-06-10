@@ -20,6 +20,7 @@ class ExcuseRequest extends FormRequest
             'type' => 'required|string',
             'description' => 'required|max:225',
             'document' => 'required|file|mimes:pdf',
+            'duration' => 'required|numeric',
         ];
     }
 

@@ -19,6 +19,8 @@ class ExcuseResource extends JsonResource
             'type' => $this->type,
             'description' => $this->description,
             'document' => asset("storage/{$this->document}"),
+            'date_start' => $this->date_start->timestamp,
+            'date_end' => $this->date_end->timestamp,
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
         ];

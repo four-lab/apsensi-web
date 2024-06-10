@@ -14,6 +14,8 @@ return new class extends Migration
     {
         Schema::create('excuses', function (Blueprint $table) {
             $table->id();
+            $table->date('date_start');
+            $table->date('date_end');
             $table->string('type', 100);
             $table->enum('status', ExcuseStatus::values())->default('pending');
             $table->string('description', 255);

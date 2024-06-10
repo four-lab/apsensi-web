@@ -11,6 +11,8 @@ class Excuse extends Model
     use HasFactory;
 
     protected $fillable = [
+        'date_start',
+        'date_end',
         'type',
         'status',
         'description',
@@ -19,5 +21,7 @@ class Excuse extends Model
 
     protected $casts = [
         'status' => ExcuseStatus::class,
+        'date_start' => 'date',
+        'date_end' => 'date',
     ];
 }
