@@ -16,6 +16,7 @@ class ExcuseResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'status' => $this->status,
             'type' => $this->type,
             'description' => $this->description,
             'document' => asset("storage/{$this->document}"),
