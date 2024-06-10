@@ -21,6 +21,7 @@ class ExcuseRequest extends FormRequest
             'description' => 'required|max:225',
             'document' => 'required|file|mimes:pdf',
             'duration' => 'required|numeric',
+            'date' => 'date',
         ];
     }
 
