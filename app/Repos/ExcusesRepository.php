@@ -2,20 +2,13 @@
 
 namespace App\Repos;
 
-use App\Models\Excuses;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Excuse;
 
 class ExcusesRepository
 {
-    public static function show()
+    public static function create(array $data): Excuse
     {
-        return Excuses::all();
-    }
-    public static function create(array $data) : Excuses
-    {
-        $data['document'] = $data['document']->store('public/excuses');
-
-        return Excuses::create($data);       
+        $data['document'] = $data['document']->storePublicly('excuses', 'public');
+        return Excuse::create($data);
     }
 }

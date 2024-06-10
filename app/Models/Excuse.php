@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\ExcuseStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Excuses extends Model
+class Excuse extends Model
 {
     use HasFactory;
 
@@ -14,5 +15,9 @@ class Excuses extends Model
         'status',
         'description',
         'document',
+    ];
+
+    protected $casts = [
+        'status' => ExcuseStatus::class,
     ];
 }

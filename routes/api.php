@@ -31,11 +31,8 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('holidays', [HolidayController::class, 'index'])->name('holidays');
     Route::get('schedules', [ScheduleController::class, 'index'])->name('schedules');
-   
-    Route::prefix('/excuses')->name('excuses.')->group(function () {
-        Route::get('/', [ExcusesController::class, 'index'])->name('index');
-        Route::post('/create', [ExcusesController::class, 'create'])->name('create');
-    });
+
+    Route::post('excuses', [ExcusesController::class, 'store'])->name('excuses.store');
 
     Route::prefix('user')->controller(UserController::class)->group(function () {
         Route::get('/', 'show')->name('user');
