@@ -4,6 +4,7 @@ use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\SubjectController;
+use App\Livewire\AttendancePage;
 use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\ResetPassword;
@@ -26,6 +27,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('attendances', AttendancePage::class)->name('attendances');
     Route::get('dashboard', Dashboard::class)->name('dashboard');
 
     Route::get('employees', EmployeePage::class)->name('employees');
