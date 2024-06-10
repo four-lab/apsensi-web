@@ -11,6 +11,7 @@ class Excuse extends Model
     use HasFactory;
 
     protected $fillable = [
+        'employee_id',
         'date_start',
         'date_end',
         'type',
