@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
+Route::get('/', fn () => view('pages.home'))->name('home');
+
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)->name('login');
     Route::get('forgot-password', ForgotPassword::class)->name('forgot-pass');
