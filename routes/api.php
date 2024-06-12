@@ -38,6 +38,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('attendances')->name('attendance.')
         ->controller(AttendanceController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
             Route::get('status', 'status')->name('status');
             Route::post('attempt', 'attempt')->name('attempt');
             Route::post('valid-area', 'validArea')->name('valid-area');
