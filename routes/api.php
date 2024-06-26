@@ -33,10 +33,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('holidays', [HolidayController::class, 'index'])->name('holidays');
     Route::get('schedules', [ScheduleController::class, 'index'])->name('schedules');
 
+    Route::get('excuses', [ExcusesController::class, 'index'])->name('excuses');
     Route::post('excuses', [ExcusesController::class, 'store'])->name('excuses.store');
 
     Route::prefix('attendances')->name('attendance.')
         ->controller(AttendanceController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
             Route::get('status', 'status')->name('status');
             Route::post('attempt', 'attempt')->name('attempt');
             Route::post('valid-area', 'validArea')->name('valid-area');

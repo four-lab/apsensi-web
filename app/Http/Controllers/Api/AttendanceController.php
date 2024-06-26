@@ -6,6 +6,8 @@ use App\Events\AttendanceEvent;
 use App\Exceptions\AttendanceException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\AttendanceRequest;
+use App\Http\Resources\AttendanceResource;
+use App\Models\Attendance;
 use App\Repos\AttendanceRepository;
 use App\Services\AttendanceService;
 use App\Traits\ApiResponser;
@@ -22,6 +24,20 @@ class AttendanceController extends Controller
     {
         $this->attRepo = new AttendanceRepository;
         $this->attService = new AttendanceService;
+    }
+
+    public function index(Request $request)
+    {
+        $employee = $request->user();
+        $attendances = Attendance::where('employee_id', $employee->id)
+            ->orderBy('date', 'desc')
+            ->orderBy('subject_start', 'desc')
+            ->limit(15)
+            ->get();
+
+        return $this->success(
+            AttendanceResource::collection($attendances)
+        );
     }
 
     public function status(Request $request)
