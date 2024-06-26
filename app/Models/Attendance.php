@@ -28,25 +28,20 @@ class Attendance extends Model
 
     protected $casts = [
         'status' => AttendanceStatus::class,
+        'date' => 'date',
     ];
 
     public function startAttendanceTime(): Attribute
     {
         return Attribute::make(
-            get: fn () => Carbon::createFromFormat(
-                'Y-m-d H:i:s',
-                "{$this->date} {$this->subject_start}"
-            ),
+            get: fn () => $this->date->setTimeFromTimeString($this->subject_start)
         );
     }
 
     public function endAttendanceTime(): Attribute
     {
         return Attribute::make(
-            get: fn () => Carbon::createFromFormat(
-                'Y-m-d H:i:s',
-                "{$this->date} {$this->subject_end}"
-            ),
+            get: fn () => $this->date->setTimeFromTimeString($this->subject_end)
         );
     }
 
