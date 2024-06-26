@@ -1,5 +1,6 @@
-<div class="bg-primary w-full h-full overflow-hidden pt-32">
-    <div class="text-center max-w-5xl mx-auto space-y-20 pt-20">
+<div class="bg-primary w-full h-full overflow-hidden pt-32 relative">
+
+    <div class="text-center relative  max-w-5xl mx-auto space-y-20 z-10 pt-20">
         <div class="space-y-8">
             <h2 class="text-5xl font-inika text-white font-semibold max-w-lg mx-auto">
                 Leading the Way in Attendance Tech
@@ -27,4 +28,9 @@
             >
         </div>
     </div>
+    <div
+        id="particles-js"
+        class="absolute w-full h-screen top-0 "
+        style="z-index: 0 !important; "
+    ></div>
 </div>
