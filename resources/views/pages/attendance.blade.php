@@ -12,6 +12,7 @@
             <ul
                 class="nav nav-tabs row"
                 role="tablist"
+                wire:ignore
             >
                 <li class="nav-item col-6 d-flex justify-content-center">
                     <button
@@ -37,6 +38,7 @@
                 <div
                     class="tab-pane fade show active"
                     id="daily-tab"
+                    wire:ignore.self
                 >
                     <div class="border py-5 rounded mt-4 row justify-content-center">
                         @forelse ($todayAtts as $att)
@@ -55,10 +57,47 @@
                     </div>
                 </div>
                 <div
-                    class="tab-pane fade show"
+                    class="tab-pane fade show py-5"
                     id="all-tab"
+                    wire:ignore.self
                 >
-                    All
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="bg-light"><i class="ti ti-align-left me-1 fs-4"></i> Nama Guru</th>
+                                    <th class="bg-light"><i class="ti ti-notebook me-1 fs-4"></i> Pelajaran</th>
+                                    <th class="bg-light"><i class="ti ti-calendar me-2 fs-4"></i> Tanggal</th>
+                                    <th class="bg-light"><i class="ti ti-circle-dot me-2 fs-4"></i> Status</th>
+                                    <th class="bg-light"><i class="ti ti-clock-hour-4 me-2 fs-4"></i> Jam Masuk</th>
+                                    <th class="bg-light"><i class="ti ti-clock-off me-2 fs-4"></i> Jam Keluar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($allAtts as $att)
+                                    <tr>
+                                        <td>{{ $att->employee->fullname }}</td>
+                                        <td>{{ $att->subject->name }}</td>
+                                        <td>{{ $att->date->format('d/m/Y') }}</td>
+                                        <td>
+                                            <x-attendance.status-badge :status="$att->status" />
+                                        </td>
+                                        <td>{{ $att->time_start ?? '-' }}</td>
+                                        <td>{{ $att->time_end ?? '-' }}</td>
+                                    </tr>
+
+                                @empty
+                                    <tr>
+                                        <td
+                                            colspan="6"
+                                            class="text-center"
+                                        >Tidak ada data untuk ditampilkan</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                        {{ $allAtts->links() }}
+                    </div>
                 </div>
             </div>
         </div>
