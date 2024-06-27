@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\AttendanceEvent;
 use App\Repos\AttendanceRepository;
 use Illuminate\Console\Command;
 
@@ -33,5 +34,7 @@ class ManageAttendance extends Command
         $repo->makeAbsent($date);
         $repo->makeExcused($date);
         $repo->endUnfinished($date);
+
+        AttendanceEvent::dispatch();
     }
 }
