@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Enums\ExcuseStatus;
 use App\Models\Excuse;
+use App\Repos\ExcusesRepository;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -31,9 +32,7 @@ class ExcusePage extends Component
 
     public function confirmExcuse()
     {
-        $this->excuse->update([
-            'status' => ExcuseStatus::ACCEPTED,
-        ]);
+        ExcusesRepository::confirm($this->excuse);
 
         $this->dispatch('hide-modal');
         $this->dispatch('swal-s', 'Berhasil menerima cuti');
@@ -41,9 +40,7 @@ class ExcusePage extends Component
 
     public function rejectExcuse()
     {
-        $this->excuse->update([
-            'status' => ExcuseStatus::REJECTED,
-        ]);
+        ExcusesRepository::reject($this->excuse);
 
         $this->dispatch('hide-modal');
         $this->dispatch('swal-s', 'Berhasil menolak cuti');
