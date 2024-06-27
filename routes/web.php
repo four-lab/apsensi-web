@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HolidayController;
@@ -31,6 +32,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('attendances', AttendancePage::class)->name('attendances');
+    Route::get('chart', ChartController::class)->name('chart');
     Route::get('dashboard', Dashboard::class)->name('dashboard');
 
     Route::get('employees', EmployeePage::class)->name('employees');

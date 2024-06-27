@@ -8,8 +8,8 @@ enum AttendanceStatus: string
 {
     use EnumHelper;
 
+    case PRESENT = 'present';
+    case LATE = 'late';
     case ABSENT = 'absent';
     case EXCUSED = 'excused';
-    case LATE = 'late';
-    case PRESENT = 'present';
 }
