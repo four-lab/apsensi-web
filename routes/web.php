@@ -11,6 +11,7 @@ use App\Livewire\Auth\ResetPassword;
 use App\Livewire\ClassroomPage;
 use App\Livewire\Dashboard;
 use App\Livewire\EmployeePage;
+use App\Livewire\ExcusePage;
 use App\Livewire\HolidayPage;
 use App\Livewire\Schedule\ScheduleCreate;
 use App\Livewire\SubjectPage;
@@ -35,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('employees', EmployeePage::class)->name('employees');
     Route::get('employees/datatables', EmployeeController::class)
         ->name('employees.datatables');
+
+    Route::get('excuses', ExcusePage::class)->name('excuses');
 
     Route::get('classrooms', ClassroomPage::class)->name('classrooms');
     Route::get('classrooms/datatables', ClassroomController::class)

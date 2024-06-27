@@ -25,4 +25,9 @@ class Excuse extends Model
         'date_start' => 'date',
         'date_end' => 'date',
     ];
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

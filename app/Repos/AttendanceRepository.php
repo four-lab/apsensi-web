@@ -3,8 +3,10 @@
 namespace App\Repos;
 
 use App\Enums\AttendanceStatus;
+use App\Enums\ExcuseStatus;
 use App\Models\Attendance;
 use App\Models\Employee;
+use App\Models\Excuse;
 use App\Models\Holiday;
 use App\Models\Schedule;
 use Carbon\Carbon;
@@ -37,6 +39,19 @@ class AttendanceRepository
     {
         Attendance::where('date', '<', $date)->whereNull('time_start')
             ->update(['status' => AttendanceStatus::ABSENT]);
+    }
+
+    public function makeExcused(string $date): void
+    {
+        $excuses = Excuse::where('status', ExcuseStatus::ACCEPTED)
+            ->whereDate('date_start', '<=', $date)
+            ->whereDate('date_end', '>=', $date)
+            ->pluck('employee_id');
+
+        Attendance::where('date', $date)
+            ->whereNull('time_start')
+            ->whereIn('employee_id', $excuses)
+            ->update(['status' => AttendanceStatus::EXCUSED]);
     }
 
     public function endUnfinished(string $date): void

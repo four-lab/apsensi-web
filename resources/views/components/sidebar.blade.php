@@ -115,6 +115,16 @@
                 </li>
                 <li class="sidebar-item">
                     <a
+                        class="sidebar-link @active('excuses')"
+                        href="{{ route('excuses') }}"
+                        aria-expanded="false"
+                    >
+                        <span><i class="ti ti-files"></i></span>
+                        <span class="hide-menu">Perizinan</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a
                         class="sidebar-link @active('holidays')"
                         href="{{ route('holidays') }}"
                         aria-expanded="false"
